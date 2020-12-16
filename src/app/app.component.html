@@ -1,12 +1,16 @@
 <h1>Angular Router Sample</h1>
 <nav>
-  <a routerLink="/crisis-list" class="button" routerLinkActive="activebutton">
+  <a routerLink="/crisis-center" class="button" routerLinkActive="activebutton">
     Crisis Center
   </a> |
   <a routerLink="/heroes" class="button" routerLinkActive="activebutton">
     Heroes
+  </a> |
+  <a [routerLink]="[{outlets: { popup: ['compose'] }}]" class="button" routerLinkActive="activebutton">
+    Contact
   </a>
 </nav>
 <div [@routeAnimation]="getAnimationData(routerOutlet)">
   <router-outlet #routerOutlet="outlet"></router-outlet>
 </div>
+<router-outlet name="popup"></router-outlet>
