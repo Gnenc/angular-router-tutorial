@@ -3,9 +3,10 @@
   <a routerLink="/crisis-list" class="button" routerLinkActive="activebutton">
     Crisis Center
   </a> |
-  <a routerLink="/heroes-list" class="button" routerLinkActive="activebutton">
+  <a routerLink="/heroes" class="button" routerLinkActive="activebutton">
     Heroes
   </a>
 </nav>
-
-<router-outlet></router-outlet>
+<div [@routeAnimation]="getAnimationData(routerOutlet)">
+  <router-outlet #routerOutlet="outlet"></router-outlet>
+</div>
