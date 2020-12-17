@@ -11,7 +11,7 @@ import { CrisisDetailResolverService } from './crisis-detail-resolver.service';
 
 const routes: Routes = [
   {
-    path: 'crisis-center', component: CrisisCenterComponent, children: [
+    path: '', component: CrisisCenterComponent, children: [
       {
         path: '', component: CrisisListComponent, children: [
           { 

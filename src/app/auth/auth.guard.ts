@@ -3,7 +3,8 @@ import {
   CanActivate, ActivatedRouteSnapshot,
   RouterStateSnapshot, Router,
   UrlTree, CanActivateChild,
-  NavigationExtras
+  NavigationExtras, CanLoad,
+  Route
 } from '@angular/router';
 
 
@@ -12,7 +13,7 @@ import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate, CanActivateChild {
+export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   constructor(
     private authService: AuthService,
     private router: Router
@@ -52,6 +53,12 @@ export class AuthGuard implements CanActivate, CanActivateChild {
 
     // redirect to the login page with extras
     return this.router.createUrlTree(['/login', navigationExtras]);
+  }
+
+  canLoad(route: Route): boolean {
+    const url = `${route.path}`;
+
+    return this.checkLogin(url);
   }
 
 }
