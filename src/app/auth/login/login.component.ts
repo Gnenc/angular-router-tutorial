@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 
 import { AuthService } from '../auth.service';
 
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   }
 
   setMessage() {
-    this.message = 'Logged' + (this.authService.isLoggedIn ? 'in' : 'out');
+    this.message = 'Logged ' + (this.authService.isLoggedIn ? 'in' : 'out');
   }
 
   login() {
@@ -34,8 +34,14 @@ export class LoginComponent implements OnInit {
         // however to keep the example simple, we will always redirect to '/admin'.
         const redirectUrl = '/admin';
 
+        // Set our navigation extras object
+        // that passes on our global query params and fragment
+        const navigationExtras: NavigationExtras = {
+          queryParamsHandling: 'preserve',
+          preserveFragment: true
+        };
         // redirect the user
-        this.router.navigate([redirectUrl]);
+        this.router.navigate([redirectUrl], navigationExtras);
       }
     });
   }

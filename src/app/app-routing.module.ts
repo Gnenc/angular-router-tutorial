@@ -31,7 +31,7 @@ const routes: Routes = [
     RouterModule.forRoot(
       routes,
       { 
-        enableTracing: true, // debugging purposes only
+        enableTracing: false, // debugging purposes only
         // does not load feature areas protected by a CanLoad guard
         preloadingStrategy: SelectivePreloadingStrategyService, //PreloadAllModules
       }

@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import {
   CanActivate, ActivatedRouteSnapshot,
   RouterStateSnapshot, Router,
-  UrlTree, CanActivateChild,
-  NavigationExtras, CanLoad,
-  Route
+  CanActivateChild, NavigationExtras,
+  CanLoad, Route
 } from '@angular/router';
 
 
@@ -22,7 +21,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): true | UrlTree {
+  ): boolean {
     const url: string = state.url;
     return this.checkLogin(url);
   }
@@ -30,11 +29,11 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   canActivateChild(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): true | UrlTree {
+  ): boolean {
     return this.canActivate(route, state);
   }
 
-  checkLogin(url: string): true | UrlTree {
+  checkLogin(url: string): boolean {
     if (this.authService.isLoggedIn) {
       return true;
     }
@@ -51,8 +50,9 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
       fragment: 'anchor'
     };
 
-    // redirect to the login page with extras
-    return this.router.createUrlTree(['/login', navigationExtras]);
+    // navigate to the login page with extras
+    this.router.navigate(['/login'], navigationExtras);
+    return false;
   }
 
   canLoad(route: Route): boolean {
