@@ -15,7 +15,7 @@ const routes: Routes = [
       {
         path: '', component: CrisisListComponent, children: [
           { 
-            path: '.id', 
+            path: ':id', 
             component: CrisisDetailComponent, 
             canDeactivate: [CanDeactivateGuard],
             resolve: {
